@@ -84,11 +84,11 @@ void main(){
 
 void printIntro(){
   print("#####################");
-  print("#    Calculator     #");
-  print("#       Add         #");
-  print("#     Subtract      #");
-  print("#      Divide       #");
-  print("#     Multiply      #");
+  print("#    CALCULATOR     #");
+  print("#        +          #");
+  print("#        -          #");
+  print("#        /          #");
+  print("#        *          #");
   print("#####################");
 }
 
