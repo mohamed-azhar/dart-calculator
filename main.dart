@@ -69,7 +69,7 @@ void main(){
       print("$parsedOne / $parsedTwo = ${divide(parsedOne, parsedTwo)}");
     }
     break;
-    case "q":
+    case "q": 
     {
       exit(69);
     }
