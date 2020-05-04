@@ -1,88 +1,55 @@
 import 'dart:io';
 
-void main(){
+void main() {
   printIntro();
 
-  while(true){
+  while (true) {
     var input = getOperation();
     input = input.toLowerCase();
 
-  switch (input) {
-    case "+":
-    {
-      input = getInputOne();
-      int parsedOne = int.tryParse(input);
-
-      input = getInputTwo();
-      int parsedTwo = int.tryParse(input);
-
-      if(parsedTwo == null){
-          print("Couldnt parse to an integer");
-      }
-
-      print("$parsedOne + $parsedTwo = ${add(parsedOne, parsedTwo)}");
+    switch (input) {
+      case "+":
+        {
+          List<int> inputs = getInputsAsInteger();
+          print(
+              "${inputs.first} + ${inputs.last} = ${add(inputs.first, inputs.last)}");
+        }
+        break;
+      case "-":
+        {
+          List<int> inputs = getInputsAsInteger();
+          print(
+              "${inputs.first} - ${inputs.last} = ${subtract(inputs.first, inputs.last)}");
+        }
+        break;
+      case "*":
+        {
+          List<int> inputs = getInputsAsInteger();
+          print(
+              "${inputs.first} x ${inputs.last} = ${multiply(inputs.first, inputs.last)}");
+        }
+        break;
+      case "/":
+        {
+          List<double> inputs = getInputsAsDouble();
+          print(
+              "${inputs.first} / ${inputs.last} = ${divide(inputs.first, inputs.last)}");
+        }
+        break;
+      case "q":
+        {
+          exit(69);
+        }
+        break;
+      default:
+        {
+          print("Invalid Operation.");
+        }
     }
-    break;
-    case "-":
-    {
-       input = getInputOne();
-      int parsedOne = int.tryParse(input);
-
-      input = getInputTwo();
-      int parsedTwo = int.tryParse(input);
-
-      if(parsedTwo == null){
-          print("Couldnt parse to an integer");
-      }
-
-      print("$parsedOne - $parsedTwo = ${subtract(parsedOne, parsedTwo)}");
-    }
-    break;
-    case "*":
-    {
-       input = getInputOne();
-      int parsedOne = int.tryParse(input);
-
-      input = getInputTwo();
-      int parsedTwo = int.tryParse(input);
-
-      if(parsedTwo == null){
-          print("Couldnt parse to an integer");
-      }
-
-      print("$parsedOne x $parsedTwo = ${multiply(parsedOne, parsedTwo)}");
-    }
-    break;
-    case "/":
-    {
-      input = getInputOne();
-       
-      var parsedOne = double.tryParse(input);
-
-      input = getInputTwo();
-      var parsedTwo = double.tryParse(input);
-
-      if(parsedTwo == null){
-          print("Couldnt parse to a double");
-      }
-
-      print("$parsedOne / $parsedTwo = ${divide(parsedOne, parsedTwo)}");
-    }
-    break;
-    case "q": 
-    {
-      exit(69);
-    }
-    break;
-    default:
-    {
-      print("Invalid Operation.");
-    }
-  }
   }
 }
 
-void printIntro(){
+void printIntro() {
   print("#####################");
   print("#    CALCULATOR     #");
   print("#        +          #");
@@ -92,33 +59,55 @@ void printIntro(){
   print("#####################");
 }
 
-String getOperation(){
+String getOperation() {
   stdout.write("Enter operation: ");
   return stdin.readLineSync();
 }
 
-String getInputOne(){
+List<String> getInputsAsStringList() {
   stdout.write("Enter number one: ");
-  return stdin.readLineSync();
+  String numberOne = stdin.readLineSync();
+
+  stdout.write("Enter number rwo: ");
+  String numberTwo = stdin.readLineSync();
+
+  var container = new List<String>();
+  container.add(numberOne);
+  container.add(numberTwo);
+
+  return container;
 }
 
-String getInputTwo(){
-  stdout.write("Enter number two: ");
-  return stdin.readLineSync();
+List<int> getInputsAsInteger() {
+  var inputs = getInputsAsStringList();
+  var container = new List<int>();
+  container.add(int.tryParse(inputs.first) ?? 0);
+  container.add(int.tryParse(inputs.last) ?? 0);
+
+  return container;
 }
 
-int add(int x, int y){
-  return x+y;
+List<double> getInputsAsDouble() {
+  var inputs = getInputsAsStringList();
+  var container = new List<double>();
+  container.add(double.tryParse(inputs.first) ?? 0.0);
+  container.add(double.tryParse(inputs.last) ?? 0.0);
+
+  return container;
 }
 
-int subtract(int x, int y){
-  return x-y;
+int add(int x, int y) {
+  return x + y;
 }
 
-double divide(double x, double y){
-  return x/y;
+int subtract(int x, int y) {
+  return x - y;
 }
 
-int multiply(int x, int y){
-  return x*y;
+double divide(double x, double y) {
+  return x / y;
+}
+
+int multiply(int x, int y) {
+  return x * y;
 }
